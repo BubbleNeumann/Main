@@ -1,3 +1,8 @@
+# TODO - add miss strikes
+# TODO - fix player interactive mode
+# TODO - add alert "Wrong input!" and ability to reenter the command
+
+
 def main():
     hero = Hero()
     dragon = Dragon()

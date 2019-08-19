@@ -1,16 +1,24 @@
 # array sorting --- 21/05/2019
+# edited --- 19/08/2019
 
 from random import randint
 N = 10
-l = [randint(1, 100) for x in range(N)]
-print(l)
+arr = [randint(1, 100) for x in range(N)]
+print(arr)
 i = a = 1
 while a < N:
     a += 1
     for i in range(N - 1):
-        if l[i - 1] > l[i]:
-            l[i - 1], l[i] = l[i], l[i - 1]
+        if arr[i - 1] > arr[i]:
+            arr[i - 1], arr[i] = arr[i], arr[i - 1]
 
-l.insert(0, l[N - 1])
-del l[-1]
-print(l)
+arr.insert(0, arr[N - 1])
+del arr[-1]
+print(arr)
+
+# 2nd edition:
+# import ability
+
+
+def sort():
+    global N
