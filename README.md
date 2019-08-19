@@ -1,2 +1,2 @@
 # exercises_2019
-Tasks for school and one page personal projects.
+Tasks for school and single page personal projects.
