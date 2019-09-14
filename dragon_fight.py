@@ -2,6 +2,8 @@
 # TODO - add alert "Wrong input!" and ability to reenter the command
 # TODO - class "Location"
 # TODO - start shop location
+# TODO - use_bomb def
+# for commit message: was added store location, ability to buy and use bombs.
 
 from random import randint
 
@@ -9,12 +11,17 @@ from random import randint
 def main():
     print("All your progress will be lost if you stop the program.\n")
     welcome()
+    # current_level = 0
+    # current_location = 'store'
     hero = Hero()
-    dragon = Dragon()
+    current_level = Level
+    current_level.store(hero=hero)
+
+    enemy = Dragon()
     print(info)
 
-    level = Level(dragon)
-    level.fight(hero, dragon)
+    level = Level(enemy)
+    level.fight(hero, enemy)
 
     waiting()
 
@@ -35,7 +42,8 @@ def welcome():
               "It's lend full of dangers, magic creatures and treasures.\n"
               "The Dark Master appropriated our north lands.\n"
               "King Arthur called you and asked you to kill him.\n"
-              "Your goal is to get to north lands and destroy Dark Magic at Great Kingdom.\n"
+              "Your goal is to get to north lands and destroy Dark Magic at Great Kingdom.\n\n"
+              "The path will lead you to the goal.\n"
               "Let's hit the road!\n")
         waiting()
 
@@ -67,11 +75,12 @@ class Hero(BattleUnit):
     default_stamina = 10
     shield = False
 
-    def __init__(self, armor=False, wallet=100,):
+    def __init__(self, armor=False, wallet=100, bomb=0):
         super().__init__(Hero.default_health, Hero.attack_force,
                          Hero.default_stamina, Hero.shield)
         self.armor = armor
         self.wallet = wallet
+        self.bomb = 0
 
     def keyboard_inp(self, other):
         """Hero's move"""
@@ -92,6 +101,8 @@ class Hero(BattleUnit):
                 self.shield = False
             else:
                 print('\nNothing to deactivate.')
+        elif act == "B" or "b":
+            self.use_bomb(other)
 
     def stamina_refill(self):
         if self.shield:
@@ -110,6 +121,13 @@ class Hero(BattleUnit):
             print('\nYour stamina level is too low to do it.')
         else:
             print('\nShield was already activated.')
+
+    def use_bomb(self, other):
+        if self.bomb > 0:
+            self.bomb -= 1
+            other.health -= 10
+        else:
+            print("You haven't any bombs.")
 
 
 class Dragon(BattleUnit):
@@ -139,6 +157,7 @@ class Level:
 
     def __init__(self, enemy):
         self.enemy = enemy
+        # self.current_level = current_level
 
     @staticmethod
     def echo_health(self, enemy):
@@ -155,6 +174,7 @@ class Level:
             Possible action: fire attack, usual attack, rise a shield"""
 
     def fight(self, hero, enemy):
+        # current_location = Location(Location.location_list[current_level])
         sep()
         print('Get ready!\nFight starts!\n')
         while enemy.health > 0 and hero.health > 0:
@@ -168,8 +188,45 @@ class Level:
 
         if enemy.health <= 0:
             print('\nYour Hero won!')
+            # current_level += 1
         else:
             print('\nYour Hero died.')
+        sep()
+
+    def path(self):
+        print('You went on the path.')
+
+    @staticmethod
+    def store(hero):
+        print("You've come at local shop.\n"
+              "King Arthur gave you come coins\n"
+              "and now you can buy anything you need for your journey.\n")
+
+        store_stock = "1. Bomb - 20 coins\n" \
+                      "2. Resurrection cristal - 50 coins\n" \
+                      "3. The armor - 100 coins\n"
+
+        print(store_stock)
+        print('To choose the item enter its serial number.\n'
+              'To exit press enter.\n')
+
+        inp = 1
+        print('You have got', hero.wallet, 'coins.')
+        while (inp == 1 or inp == 2 or inp == 3) and hero.wallet > 0:
+            inp = int(input())
+            if inp == 3 and hero.wallet >= 100:
+                hero.armor = True
+                hero.wallet -= 100
+                print('You got the armor.')
+            if inp == 2 and hero.wallet >= 50:
+                hero.wallet -= 50
+            if inp == 1 and hero.wallet >= 20:
+                hero.bomb += 1
+                hero.wallet -= 20
+                print('You got the bomb.')
+
+        print("You've left the store.\n")
+        print("Now you're ready to go.")
         sep()
 
 
@@ -179,11 +236,13 @@ class Location:
         2. Field
         3. The oak forest
         N. Final location (final boss)"""
+    def __init__(self, location_list):
+        self.location_list = location_list
+
+    location_list = ['store', 'field', 'forest']
 
 
 info = ['[A] - to attack', '[S] - to rise a shield',
-        '[DS] - to deactivate a shield']
-
-location_list = ['store', 'field', 'forest']
+        '[DS] - to deactivate a shield', '[B] - to use a bomb']
 
 main()
