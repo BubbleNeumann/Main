@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  	<!-- bootstrap download css-->
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  	
+  	<title>Hello, world!</title>
+  </head>
+  
+  <body>
+    
+    <h2 align ="center" style="background-color: #75BBD4; color: #FFFFFF">Time you have before the exams</h2>   
+
+    <div class="jumbotron jumbotron-fluid">
+		<h2 align ="center">It's coming...</h2>
+		<p id="output" align ="center" style ="font-size:450%"></p>
+	</div>
+
+	<!-- progress bar -->
+	<!--
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
+    </div> 
+	-->
+
+    <!-- css background -->
+  	<style>
+		body {background-color: #DCDCDC;}
+	</style>
+
+  </body>
+  <script>
+    	var today = new Date();
+    	day = today.getDate(); month = today.getUTCMonth(); year = today.getFullYear();
+
+    	//print current date:
+    	//document.write(day,"  ", month + 1, "  ", year, "  ");
+    	
+    	const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+		var firstDate = new Date(year, month + 1, day);
+		const secondDate = new Date(2020, 5, 31);
+		const startDate = new Date(2019, 9, 1)
+
+		const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
+		//document.write(diffDays);
+
+		document.getElementById("output").innerHTML=diffDays + " days";
+    </script>
+
+</html>
