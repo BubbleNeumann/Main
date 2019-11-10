@@ -1,54 +1,55 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
-	<!-- Required meta tags -->
+  <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  	<!-- bootstrap download css-->
-  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  	
-  	<title>Hello, world!</title>
+    <!-- bootstrap download css-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>exams</title>
   </head>
   
-  <body>
-    
-    <h2 align ="center" style="background-color: #75BBD4; color: #FFFFFF">Time you have before the exams</h2>   
+  <body>    
+    <h2 align ="center" class="display-4" style="background-color:#75BBD4;color:#FFFFFF;font-size:250%">Time you have before the exams</h2>   
 
-    <div class="jumbotron jumbotron-fluid">
-		<h2 align ="center">It's coming...</h2>
-		<p id="output" align ="center" style ="font-size:450%"></p>
-	</div>
-
-	<!-- progress bar -->
-	<!--
-    <div class="progress">
-      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
-    </div> 
-	-->
+    <div class="jumbotron">
+      <h1 align ="center" class="display-4" style ="font-size:240%"> It's coming...</h1>
+      <p id="output" align ="center" style ="font-size:450%"></p>
+    </div>
+    <div class="jumbotron">
+      <p id="weeks" align ="center" class="display-4" style ="font-size:230%"></p>
+    </div>
 
     <!-- css background -->
-  	<style>
-		body {background-color: #DCDCDC;}
-	</style>
+    <style>
+      body {background-color: #DCDCDC;}
+    </style>
 
   </body>
   <script>
-    	var today = new Date();
-    	day = today.getDate(); month = today.getUTCMonth(); year = today.getFullYear();
+      var today = new Date();
+      day = today.getDate(); month = today.getUTCMonth(); year = today.getFullYear();
 
-    	//print current date:
-    	//document.write(day,"  ", month + 1, "  ", year, "  ");
-    	
-    	const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-		var firstDate = new Date(year, month + 1, day);
-		const secondDate = new Date(2020, 5, 31);
-		const startDate = new Date(2019, 9, 1)
+      //print current date:
+      //document.write(day,"  ", month + 1, "  ", year, "  ");     
+      
+      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    var firstDate = new Date(year, month + 1, day);
+    const secondDate = new Date(2020, 5, 31);
+    const startDate = new Date(2019, 9, 1);
 
-		const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
-		//document.write(diffDays);
+    const diffDays = Math.round(Math.abs((secondDate - firstDate) / oneDay));
 
-		document.getElementById("output").innerHTML=diffDays + " days";
+    var num= diffDays / 7
+    var num1= (diffDays % 7)/10
+    var diffWeeks = num.toFixed(1) - num1.toFixed(1);
+    var print = "";
+    if (diffDays % 7 > 1) {var print = "about "};
+
+    document.getElementById("output").innerHTML=diffDays + " days";
+    document.getElementById("weeks").innerHTML= print + diffWeeks + " weeks";
     </script>
 
 </html>
