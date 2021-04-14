@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="eng">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Julius Sans One'>
+	
+	<title>TeuxDeux</title>
+  </head>
+  
+  <body style="background-color: #DCDCDC;">    
+
+    <div class = "central" style="background-color: #f2f2f2; padding: 15px; margin-bottom: 30px; margin-top: 30px;">
+	<p id="today" align="center" style ="font-family: 'Julius Sans One'"></p>
+	<p id="tomorrow" align ="center" style ="font-size:200%; font-family: 'Julius Sans One'"></p>
+	</div>
+  
+  </body>
+  <style>
+	  .central {
+		  width: 800px;
+		  margin: auto;
+  </style>
+  
+  <script>
+	
+	Date.prototype.monthNames = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"
+	];
+
+	Date.prototype.getMonthName = function() {
+		return this.monthNames[this.getMonth()];
+	};
+	
+	
+	var today_date = new Date();
+	
+	var postfix;
+	
+	var today_day = today_date.getUTCDate();
+	
+	if (today_day == 1){postfix = "st";}	
+	else if(today_day == 2) { postfix = "nd"; }
+	else if (today_day == 3) { postfix = "rd";}
+	else { postfix = "th"; }
+	
+	var today_month = today_date.getMonthName();
+	
+	document.getElementById("today").innerHTML = today_month + " " + today_day + postfix;
+	
+	
+
+
+
+  </script>
+
+</html>
