@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Julius Sans One'>
+	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Helvetica Neue'>
 	
 	<title>TeuxDeux</title>
   </head>
@@ -13,18 +13,58 @@
   <body style="background-color: #DCDCDC;">    
 
     <div class = "central" style="background-color: #f2f2f2; padding: 15px; margin-bottom: 30px; margin-top: 30px;">
-	<p id="today" align="center" style ="font-family: 'Julius Sans One'"></p>
-	<p id="tomorrow" align ="center" style ="font-size:200%; font-family: 'Julius Sans One'"></p>
+		<div class ="row">
+			
+			<div class = "col-sm-4">
+			<p id = "today_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
+			<p id="today" align="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			</div>
+			
+			<div class = "col-sm-4">
+			<p id = "tomorrow_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
+			<p id="tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			</div>
+			
+			<div class = "col-sm-4">
+			<p id = "day_after_tomorrow_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
+			<p id="day_after_tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			<input style = "width: 240px; margin-bottom: 5px;">
+			</div>
+			
+		</div>
 	</div>
   
   </body>
   <style>
-	  .central {
-		  width: 800px;
-		  margin: auto;
+	.central {
+		 width: 800px;
+		 margin: auto;
+	}
+	.input {
+		
+	}
+		  
+	  	
   </style>
   
   <script>
+	
+	function getPostfix(n)
+	{
+		if (n == 1) return "st";	
+		else if(n == 2) return "nd";
+		else if (n == 3) return "rd";
+		else return "th";
+	}
+	
 	
 	Date.prototype.monthNames = [
     "January", "February", "March",
@@ -37,24 +77,44 @@
 		return this.monthNames[this.getMonth()];
 	};
 	
+	Date.prototype.dayNames = [
+		"SUNDAY", "MONDAY", "TUSDAY", "WEDNESDAY",
+		"THURSDAY", "FRIDAY", "SATURDAY"
+	]
 	
+	Date.prototype.getDayName = function() {
+		return this.dayNames[this.getDay()];
+	};
+	
+	// today
 	var today_date = new Date();
 	
-	var postfix;
-	
-	var today_day = today_date.getUTCDate();
-	
-	if (today_day == 1){postfix = "st";}	
-	else if(today_day == 2) { postfix = "nd"; }
-	else if (today_day == 3) { postfix = "rd";}
-	else { postfix = "th"; }
-	
+	today_day = today_date.getUTCDate();
 	var today_month = today_date.getMonthName();
 	
-	document.getElementById("today").innerHTML = today_month + " " + today_day + postfix;
+	// tomorrow
+	var tomorrow_date = new Date(today_date);
+	tomorrow_date.setDate(tomorrow_date.getDate() + 1)
 	
+	tomorrow_day = tomorrow_date.getUTCDate();
+	var tomorrow_month = tomorrow_date.getMonthName();
 	
-
+	// the day after tomorrow	
+	var day_after_tomorrow_date = new Date(tomorrow_date);
+	day_after_tomorrow_date.setDate(day_after_tomorrow_date.getDate() + 1)
+	
+	day_after_tomorrow_day = day_after_tomorrow_date.getUTCDate();
+	var day_after_tomorrow_month = day_after_tomorrow_date.getMonthName();
+	
+	// set week days ids
+	document.getElementById("today_week_day").innerHTML = today_date.getDayName();
+	document.getElementById("tomorrow_week_day").innerHTML = tomorrow_date.getDayName();
+	document.getElementById("day_after_tomorrow_week_day").innerHTML = day_after_tomorrow_date.getDayName();
+	
+	// set date ids
+	document.getElementById("today").innerHTML = today_month + " " + today_day + getPostfix(today_day);
+	document.getElementById("tomorrow").innerHTML = tomorrow_month + " " + tomorrow_day + getPostfix(tomorrow_day);
+	document.getElementById("day_after_tomorrow").innerHTML = day_after_tomorrow_month + " " + day_after_tomorrow_day + getPostfix(day_after_tomorrow_day);
 
 
   </script>
