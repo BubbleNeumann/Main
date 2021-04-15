@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Helvetica Neue'>
+	<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Antonio'>
 	
 	<title>TeuxDeux</title>
   </head>
@@ -16,27 +17,33 @@
 		<div class ="row">
 			
 			<div class = "col-sm-4">
-			<p id = "today_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
-			<p id="today" align="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
+			<p id = "today_week_day" align="center" style = "font-family: 'Antonio'; margin-bottom: 10px; font-size: 1.8em; font-weight: bold; "> </p>
+			<p id="today" align="center" style ="font-family: 'Helvetica Neue'; font-size: 1.1em;"></p>
+			<input id = "today_inp_first" type="text" maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
 			</div>
 			
 			<div class = "col-sm-4">
-			<p id = "tomorrow_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
-			<p id="tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
+			<p id = "tomorrow_week_day" align="center" style = "font-family: 'Antonio'; margin-bottom: 10px; font-size: 1.8em;font-weight: bold;"></p>
+			<p id="tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.1em;"></p>
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
 			</div>
 			
 			<div class = "col-sm-4">
-			<p id = "day_after_tomorrow_week_day" align="center" style = "margin-bottom: 10px; font-size: 1.5em;"> </p>
-			<p id="day_after_tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.2em;"></p>
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
-			<input style = "width: 240px; margin-bottom: 5px;">
+			<p id = "day_after_tomorrow_week_day" align="center" style="font-family: 'Antonio'; margin-bottom: 10px; font-size: 1.8em;font-weight: bold;"></p>
+			<p id="day_after_tomorrow" align ="center" style ="font-family: 'Helvetica Neue'; font-size: 1.1em;"></p>
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
+			<input maxlength="28">
 			</div>
 			
 		</div>
@@ -48,14 +55,17 @@
 		 width: 800px;
 		 margin: auto;
 	}
-	.input {
-		
+	input {
+		width: 240px;
+		margin-bottom: 5px;
 	}
-		  
-	  	
+
   </style>
   
   <script>
+	
+	// script to fill headers 
+	
 	
 	function getPostfix(n)
 	{
