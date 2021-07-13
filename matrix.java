@@ -4,34 +4,73 @@ import java.util.InputMismatchException;
 class Matrix {
 
     private int row, col;
-    private int body[];
-
-    // default constructior
-    public Matrix() {
+    private int* body;
+    
+    // used by several constructors
+    private static int* fillMatrix(int row, int col) {
+        
+        Scanner scanner = new Scanner(System.in);
+        
+        int* body = new int[row*col];
+        while(row--) {
+            
+            // get a string, then parse, then fill an array
+            
+        }
+    }
+    
+    // used only by default constructor
+    // do I need this method?? or it might be moved into default constructor's body
+    private static int getDimension(String message) {
         
         Scanner scanner = new Scanner(System.in);
         boolean excCaught;
+        
+        int value;
 
         do {
-
+            
             excCaught = false;
-
             try {
               
-                System.out.println("Number of rows?");
-                row = scanner.nextInt();
+                System.out.println(message);
+                value = scanner.nextInt();
                 
-                System.out.println("Number of columns?");
-                col = scanner.nextInt();
             } catch(InputMismatchException e) {
               
                 excCaught = true;
                 System.out.println("try again");
+                
+                // move the scanner onto the next line 
+                // unless it becames an infinite loop
                 scanner.next();
             }
-
+            
         } while (excCaught);
         scanner.close();
+        
+        return value;
+    }
+
+    // default constructor
+    public Matrix() {
+        
+        row = getDimension("Number of rows?");
+        col = getDimension("Number of columns?");
+        body = fillMatrix(row, col);
+    }
+    
+    // initialization constructor 
+    public Matrix(int row, int col) {
+        this.row = row;
+        this.col = col;
+        body = fillMatrix(row, col);
+    }
+    
+    public Matrix matrixMultiplication( Matrix& multiplicand) {
+        
+        Matrix result = new Matrix();
+        
     }
   
     // the determinant is a scalar value that is a function of the entries of a square matrix
@@ -65,7 +104,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-        Matrix mx = new Matrix();
+        Matrix mx1 = new Matrix();
+        Matrix mx2 = new Matrix();
 
     }
 }
