@@ -4,18 +4,24 @@ import java.util.InputMismatchException;
 class Matrix {
 
     private int row, col;
-    private int* body;
+    private int body[];
     
     // used by several constructors
-    private static int* fillMatrix(int row, int col) {
+    private void fillMatrix(int row, int col) {
         
         Scanner scanner = new Scanner(System.in);
         
-        int* body = new int[row*col];
+        body = new int[row*col];
         while(row--) {
             
             // get a string, then parse, then fill an array
             
+            String  line = scanner.readLine();    
+        
+            String[] val = line.trim().split("\\s+");
+            for (int i = 0; i < col; i++) {
+                body[i] = Integer.parseInt(val[i]);
+            }
         }
     }
     
@@ -67,7 +73,7 @@ class Matrix {
         body = fillMatrix(row, col);
     }
     
-    public Matrix matrixMultiplication( Matrix& multiplicand) {
+    public Matrix matrixMultiplication( Matrix multiplicand) {
         
         Matrix result = new Matrix();
         
@@ -86,7 +92,7 @@ class Matrix {
     // rank of a matrix A is the dimension of the vector space generated (or spanned) by its columns 
     public int calcRank() {
         
-        int rank(0);
+        int rank = 0;
         return rank;
     }
 
@@ -105,7 +111,9 @@ public class Main {
     public static void main(String[] args) {
         
         Matrix mx1 = new Matrix();
-        Matrix mx2 = new Matrix();
+        // Matrix mx2 = new Matrix();
+        
+        mx1.print();
 
     }
 }
