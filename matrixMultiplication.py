@@ -10,7 +10,7 @@ class Matrix:
             for i in range(self.__row):
                 strRow = input("Row no." + str(i) + ": ")
                 intRow = strRow.split()
-                self.__content.append(intRow);
+                self.__content.append(intRow)
         else:
             for i in range(self.__row):
                 self.__content.append([])
@@ -35,15 +35,19 @@ class Matrix:
     def printMatrix(self):
         for i in range(self.__row):
             print(self.__content[i])
-            
-first = Matrix()
-second = Matrix()
 
-result = first.multiply(second)
+def main():      
+    first = Matrix()
+    second = Matrix()
 
-# print the result if possible
-if (type(result) == type(first)):
-    result.printMatrix()
-else:
-    print("Matrixes cannot be multiplied")
+    result = first.multiply(second)
+
+    # print the result if possible
+    if (type(result) == type(first)):
+        result.printMatrix()
+    else:
+        print("Matrixes cannot be multiplied")
     
+# indicates that a file is a script and can be executed
+if __name__ == '__main__':
+    main()
