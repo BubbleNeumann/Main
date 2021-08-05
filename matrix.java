@@ -1,119 +1,65 @@
-import java.util.Scanner;
-import java.util.InputMismatchException;
+//import java.lang.Throwable;
 
 class Matrix {
 
     private int row, col;
-    private int body[];
-    
-    // used by several constructors
-    private void fillMatrix(int row, int col) {
-        
-        Scanner scanner = new Scanner(System.in);
-        
-        body = new int[row*col];
-        while(row--) {
-            
-            // get a string, then parse, then fill an array
-            
-            String  line = scanner.readLine();    
-        
-            String[] val = line.trim().split("\\s+");
-            for (int i = 0; i < col; i++) {
-                body[i] = Integer.parseInt(val[i]);
+    private int body[][];
+
+    // default constructor
+    public Matrix() {
+
+        final int ROW = 2;
+        final int COL = 2;
+
+        row = ROW;
+        col = COL;
+
+        this.body = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                body[i][j] = i+j;
             }
         }
     }
     
-    // used only by default constructor
-    // do I need this method?? or it might be moved into default constructor's body
-    private static int getDimension(String message) {
-        
-        Scanner scanner = new Scanner(System.in);
-        boolean excCaught;
-        
-        int value;
+    public Matrix multiply(Matrix multiplicand) throws Exception {
 
-        do {
-            
-            excCaught = false;
-            try {
-              
-                System.out.println(message);
-                value = scanner.nextInt();
-                
-            } catch(InputMismatchException e) {
-              
-                excCaught = true;
-                System.out.println("try again");
-                
-                // move the scanner onto the next line 
-                // unless it becames an infinite loop
-                scanner.next();
+        if (this.col != multiplicand.row) {
+            throw new ArithmeticException("Impossible to multiply");
+        }
+
+        Matrix product = new Matrix();
+
+        for (int i = 0; i < product.row; i++) {
+            for (int j = 0; j < product.col; j++) {
+                product.body[i][j] = 0;
+                for (int k = 0; k < this.row; k++) {
+                    product.body[i][j] += this.body[i][k]*multiplicand.body[k][j];
+                }            
             }
-            
-        } while (excCaught);
-        scanner.close();
-        
-        return value;
+        }
+
+        return product;        
     }
 
-    // default constructor
-    public Matrix() {
-        
-        row = getDimension("Number of rows?");
-        col = getDimension("Number of columns?");
-        body = fillMatrix(row, col);
-    }
-    
-    // initialization constructor 
-    public Matrix(int row, int col) {
-        this.row = row;
-        this.col = col;
-        body = fillMatrix(row, col);
-    }
-    
-    public Matrix matrixMultiplication( Matrix multiplicand) {
-        
-        Matrix result = new Matrix();
-        
-    }
-  
-    // the determinant is a scalar value that is a function of the entries of a square matrix
-    public int calcDeterminant() {
-        
-        int det;
-        
-        if (row != col) det = 0;
-        
-        return det;
-    }
-    
-    // rank of a matrix A is the dimension of the vector space generated (or spanned) by its columns 
-    public int calcRank() {
-        
-        int rank = 0;
-        return rank;
-    }
+    public void print() {
 
-    public void printMatrix() {
-        
-        for (int i = row; i > 0 ; i--) {
-            for (int j = col; j > 0; j--) {
-                System.out.print(body[(row-i)*col + col-j]);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                System.out.print(body[i][j]);
             }
+            System.out.println();
         }
     }
 }
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         Matrix mx1 = new Matrix();
-        // Matrix mx2 = new Matrix();
-        
-        mx1.print();
-
+        Matrix mx2 = new Matrix();
+        mx1.multiply(mx2).print();
     }
 }
