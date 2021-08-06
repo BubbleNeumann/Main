@@ -1,2 +1,2 @@
 # Main
-Single page personal projects.
+Drafts and ideas for pet projects.
