@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wrting prompts</title>
+    <style>
+        body {
+            background-color: #7b7b7b;
+        }
+
+        .central {
+            width: 900px;
+            margin: auto;
+        }
+
+        h3 {
+            color: #2f2f2f;
+            font-family: "Goudy Bookletter 1911", sans-serif;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            color: #2f2f2f;
+            font-family: "Goudy Bookletter 1911", sans-serif;
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            background-color: #b4b4b4;
+            width: 100%;
+        }
+
+        .stopwatch {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .stopwatch span {
+            font-weight: bold;
+            display: block;
+        }
+
+        button {
+            background-color: #4569a3;
+            color: #2f2f2f;
+            font-weight: bold;
+            font-size: large;
+            padding: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="central" align="center">
+
+        <h3 class="stopwatch" id="a-timer"></h3>
+        <h4 id="writingPrompt" align="center">Writing prompts go here.</h4>
+        <textarea cols="100" rows="20"></textarea>
+        <div align="right">
+            <button>STOP</button>
+        </div>
+
+        <!-- TODO display a reroll button -->
+    </div>
+
+</body>
+
+<script>
+
+    // TODO read .md files and fetch a list of locations from there
+
+    // TODO words counter
+
+    var reader = new FileReader();
+
+    function readMarkdown(filePath) {
+        var output = "";
+        if (filePath.files && filePath.files[0]) {
+            reader.onload = function (e) {
+                output = e.target.result;
+                displayContents(output);
+            };//end onload()
+            reader.readAsText(filePath.files[0]);
+        }
+    }
+
+    function displayContents(txt) {
+        converter = new showdown.Converter();
+        html = converter.makeHtml(txt);
+        var el = document.getElementById('main');
+        el.innerHTML = html; //display output in DOM
+
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "main"]);
+
+    }
+
+    const locations = [
+        "на болотистой местности", "в пекарне", "в общественном туалете",
+        "на кладбище", "неподалеку от грохочущего водопада", "среди изумрудных лесов и лазурных озер",
+        "на морском берегу", "на заброшенном вокзале", "в обшарпанном гостиничном номере",
+        "в большом театре", "на пустой ночной дороге", "среди цветущих деревьев",
+        "на берегу быстрой реки", "на каменистом холме среди янтарной пустоши",
+        "в мире вулканических гор и океанов тошнотворной слизи", "среди зловещих извивающихся лесов",
+        "на развилке дорог, не отмеченной ни на одной карте", "на рыбацкой лодке",
+        "на роскошной парусной яхте", "на мосту", "под мостом", "на космическом корабле",
+        "на балконе", "в порту", "на тропической вилле"
+    ]
+
+</script>
+
+<script>
+    var Stopwatch = function (elem, options) {
+
+        var timer = createTimer(),
+            stopButton = createButton("stop", stop),
+            offset,
+            clock,
+            interval;
+
+        // default options
+        options = options || {};
+        options.delay = options.delay || 1;
+
+        // append elements     
+        elem.appendChild(timer);
+        elem.appendChild(stopButton);
+
+        // initialize
+        reset();
+
+        // private functions
+        function createTimer() {
+            return document.createElement("span");
+        }
+
+        function createButton(action, handler) {
+            var a = document.createElement("a");
+            a.href = "#" + action;
+            a.innerHTML = action;
+            a.addEventListener("click", function (event) {
+                handler();
+                event.preventDefault();
+            });
+            return a;
+        }
+
+        function start() {
+            if (!interval) {
+                offset = Date.now();
+                interval = setInterval(update, options.delay);
+            }
+        }
+
+        function stop() {
+            if (interval) {
+                clearInterval(interval);
+                interval = null;
+            }
+        }
+
+        function reset() {
+            clock = 0;
+            render(0);
+        }
+
+        function update() {
+            clock += delta();
+            render();
+        }
+
+        function render() {
+            timer.innerHTML = (clock / 1000).toFixed();
+        }
+
+        function delta() {
+            var now = Date.now(),
+                d = now - offset;
+
+            offset = now;
+            return d;
+        }
+
+        // public API
+        this.start = start;
+        this.stop = stop;
+        this.reset = reset;
+    };
+
+    // programmatic examples
+    var a = document.getElementById("a-timer");
+    aTimer = new Stopwatch(a, {
+        delay: 1000
+    });
+    aTimer.start();
+
+</script>
+
+
+</html>
