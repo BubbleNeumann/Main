@@ -1,1 +1,7 @@
 **/target/
+/CMakeLists.txt
+/cmake-build-debug/
+/.vscode/
+/out
+**/.idea/
+**/Cargo.lock
