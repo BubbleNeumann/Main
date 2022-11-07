@@ -3,50 +3,35 @@
 // CodeTON problem B
 
 #include <iostream>
-
-#define forn(i, n) for (int i = 0; i < int(n); ++i)
+#include <string>
 
 using namespace std;
 
 void solve() 
 {
-    long long n;
+    long long int n;
     cin >> n;
        
-    unsigned long long inp;
+    string inp;
     cin >> inp;
 
-    cout << inp << endl;
-
-    int max_g = 1, cur_g = 1, count_x = 0, count_y = 0;
+    long long int max_g = 1, cur_g = 1, count_x = 0, count_y = 0;
     int prev, cur;
-
-    prev = inp % 10;
-
+    
+    prev = inp.at(0) == '1';
     prev == 0 ? count_x++ : count_y++;
-    inp /= 10;
 
-    forn(_, n-1)
+    for (int i = 1; i < n; ++i)
     {
-        cur = inp % 10;
-        // cout << inp << endl;
-        inp /= 10;
+        cur = inp.at(i) == '1';
         cur == 0 ? count_x++ : count_y++;
-        if (prev == cur) cur_g++;
-        // else 
-        // {
-        //     // if ((count_x + count_y) == n) cur_g++;
-        //     cur_g = 1;
-        // }
+        cur_g += prev == cur;
         if (cur_g > max_g) max_g = cur_g;
         if (prev != cur ) cur_g = 1;
         prev = cur;
-        cout << max_g << endl;
     }
 
     // compute ratio
-
-    cout << count_x << " " << count_y << " " << max_g << "\n";
     cout << max(max_g * max_g, count_x * count_y) << "\n";
 }
 
@@ -54,7 +39,6 @@ int main()
 {
     int t;
     cin >> t;
-    while (t--)
-        solve();
+    while (t--) solve();
     return 0;
 }
