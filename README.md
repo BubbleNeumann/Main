@@ -1,2 +1,2 @@
 # Main
-Drafts and ideas for pet projects.
+Drafts, problems from Codeforces and ideas for pet projects.
