@@ -16,6 +16,7 @@ void TestSolve(int val1, int val2, int expected_res)
     assert(solve(val1, val2) == expected_res);
 }
 
+// testing
 int main()
 {
     int t, val1, val2;
@@ -29,3 +30,9 @@ int main()
         
     return 0;
 }
+
+// solution
+// int main()
+// {
+//     
+// }
