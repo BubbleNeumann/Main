@@ -26,24 +26,23 @@ void solve()
     }
 
     sort(b, b + m);
-    
-    // for (int i = 0; i < m; ++i)
-    // {
-    //     cout << b[i];
-    // }
 
     // for (int i = 1, j = b[0], l = 0; j <= b_max; i = b[l++],j = b[l])
     // {
     //     for (int k = b[l-1] + 1; k < j; s -= k++);
     //     // if (s < 0 && i != b_max -1 ) ans = false;
     // }
-    for (int i = 0, j = b[0]; j <= b_max; j = b[++i])
+    // for (int i = 1, j = b[0]; j <= b_max; j = b[++i])
+    // {
+    //     for (int k = b[i-1] + 1; k < j; s -= k++);
+    // }
+
+    for (int i = 0, start = 1, end = b[i]; i < m; start = end + 1, end = b[++i])
     {
-        for (int k = b[i]; k < j; s -= k++);
-        // if (s < 0 && i != b_max -1 ) ans = false;
+        for (int num = start; num < end; s -= num++);
     }
 
-    cout << s << " ";
+    // cout << "\n" << s << " ";
 
     // int summ = 0;
     // for (int i = 0; i < b_max; summ += ++i);
