@@ -8,19 +8,19 @@ public class Task2 {
     double[][] matrix;
 
     public Task2() {
-        this.rowCount = 0;
-        this.colCount = 0;
+        rowCount = 0;
+        colCount = 0;
     }
 
     public Task2(int rowCount, int colCount) {
         this.rowCount = rowCount;
         this.colCount = colCount;
-        this.matrix = new double[rowCount][colCount];
+        matrix = new double[rowCount][colCount];
         String[] lineElems;
         for (int i = 0; i < rowCount; ++i) {
             lineElems = System.console().readLine().trim().split("\\s+");
             for (int j = 0; j < colCount; ++j) {
-                this.matrix[i][j] = Double.parseDouble(lineElems[j]);
+                matrix[i][j] = Double.parseDouble(lineElems[j]);
             }
         }
     }
@@ -40,7 +40,7 @@ public class Task2 {
     }
 
     public void print() {
-        for (double[] row : this.matrix) {
+        for (double[] row : matrix) {
             System.out.println(Arrays.toString(row));
         }
     }

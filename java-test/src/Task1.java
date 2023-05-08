@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
 public class Task1 {
     double[] args;
 
@@ -14,31 +17,14 @@ public class Task1 {
     }
 
     public double calcAvg() {
-        double sum = 0;
-        for (double e : this.args) {
-            sum += e;
-        }
-
-        return sum / this.args.length;
+        return Arrays.stream(args).sum() / args.length;
     }
 
-    public double calcMin() {
-        double min = this.args[0];
-        for (int i = 1; i < this.args.length; ++i) {
-            if (this.args[i] < min) {
-                min = this.args[i];
-            }
-        }
-        return min;
+    public double calcMin() throws NoSuchElementException {
+        return Arrays.stream(args).min().getAsDouble();
     }
 
-    public double calcMax() {
-        double max = this.args[0];
-        for (int i = 1; i < this.args.length; ++i) {
-            if (this.args[i] > max) {
-                max = this.args[i];
-            }
-        }
-        return max;
+    public double calcMax() throws NoSuchElementException {
+        return Arrays.stream(args).max().getAsDouble();
     }
 }
